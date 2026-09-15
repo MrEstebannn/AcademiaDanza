@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HYPE ACADEMIC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    [id] {
+      scroll-margin-top: 100px;
+    }
+    .seccion-pagina {
+      display: none;
+    }
+  </style>
+</head>
+<body style="padding-top: 90px;">
+
+  <!-- Barra de Navegación (Bootstrap)-->
+  <nav class="navbar bg-body-tertiary fixed-top px-3">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center gap-2" onclick="mostrarSeccion('inicio-seccion')" style="cursor: pointer;">
+        <img src="LogoPagina.png" alt="Logo" width="70" height="70">
+        <h5 class="m-0 fw-bold">HYPE ACADEMIC</h5>
+      </div>
+
+      <div class="d-flex align-items-center ms-auto gap-2">
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
+        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#registroModal">Inscribirse</button>
+        <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#carritoModal" style="background-color: #512da8; border: none;">
+          🛒 Carrito
+          <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+        </button>
+        <a class="navbar-brand m-0 fs-6 fw-semibold ms-2" href="#">MENU</a>
+      </div>
+
+      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel">MENU</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+  <li class="nav-item">
+    <a class="nav-link" href="#" onclick="irASeccionInicio('clases')"><h4>➡️Clases</h4></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" onclick="irASeccionInicio('membresias')"><h4>➡️Tipos de membresía</h4></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" onclick="mostrarSeccion('productos-seccion')"><h4>➡️Tienda & Productos</h4></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" onclick="mostrarSeccion('nosotros-seccion')"><h4>➡️Nosotros</h4></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" onclick="mostrarSeccion('blogs-seccion')"><h4>➡️Noticias & Blogs</h4></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" onclick="mostrarSeccion('contacto-form-seccion')"><h4>➡️Formulario de Contacto</h4></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" onclick="mostrarSeccion('admin-seccion')"><h4>➡️Panel Administrador</h4></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" onclick="irASeccionInicio('contacto')"><h4>➡️Contacto Info</h4></a>
+  </li>
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div id="inicio-seccion" class="seccion-pagina">
+<!--Contenedor "Promocional" (Bootstrap)-->
+<div class="container-fluid py-5" style="background-color: #512da8; color: white;">
+<div class="container text-center">
+<div class="row row-cols-1 row-cols-md-2 align-items-center g-4">
+<div class="col"><h2 class="fw-bold mb-3">Mantente sano al ritmo de la musica</h2><p class="h5 fw-normal">
+Academia de danza con clases variadas,<br>inscríbete en línea y revisa tu asistencia y progreso desde tu celular.</p>
+<button type="button" class="btn btn-light fw-bold mt-2" onclick="mostrarSeccion('productos-seccion')">🛍️ Tienda de Productos</button>
+</div>
+<div class="col"><img src="Logo Promocional.png"class="img-fluid rounded shadow"alt="Clase de baile"style="height: 350px; width: 100%; object-fit: cover;"></div>
+</div>
+</div>
+</div>
+
+<div id="bannerCuponSeptiembre" class="container my-5" style="display: none;">
+  <div class="card shadow border-0 bg-warning bg-gradient text-dark text-center p-4 rounded-4">
+    <h2 class="fw-bold mb-2">🎉 ¡CUPÓN DE DESCUENTO ESPECIAL DE SEPTIEMBRE! 🎉</h2>
+    <p class="fs-5 mb-3">Utiliza el código de descuento en tu carrito de compras durante este mes:</p>
+    <div class="d-inline-block bg-dark text-white fw-bold fs-3 px-4 py-2 rounded-pill shadow-sm align-self-center mb-2">
+      SEPTIEMBRE10
+    </div>
+    <small class="text-dark fw-semibold">¡Aprovecha $5.000 de rebaja directa en tu total!</small>
+  </div>
+</div>
+
+  <!--Clases (Tarjetas) (Bootstrap)-->
+<div class="container my-5" id="clases">
+  <h1 class="text-center fw-bold mb-2">Nuestras clases</h1>
+  <h5 class="text-center text-muted mb-4 fs-6">Elige el estilo que más te acomode. Cupos limitados por clase.</h5>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+<div class="col">
+<div class="card h-100 shadow-sm border-0">
+  <img src="Foto Ballet.jpg" class="card-img-top" alt="Ballet" style="height: 160px; object-fit: cover;">
+<div class="card-body d-flex flex-column">
+<div>
+  <span class="badge rounded-pill mb-2" style="background-color: #ec4899; color: #fff;">Ballet</span>
+  <h3 class="h6 mb-1">Ballet Principiante</h3>
+  <p class="small text-muted mb-1">60 min · 15 cupos</p>
+  <p class="fw-bold mb-2">$25.000</p>
+</div>
+  <a href="#" class="btn text-white mt-auto" style="background-color: #ec4899;" onclick="agregarClaseAlCarrito('Ballet Principiante', 25000, 15)">Inscribirme</a>
+</div>
+</div>
+</div>
+
+<div class="col">
+<div class="card h-100 shadow-sm border-0">
+  <img src="Foto Salsa.jpg" class="card-img-top" alt="Salsa" style="height: 160px; object-fit: cover;">
+<div class="card-body d-flex flex-column">
+<div>
+  <span class="badge rounded-pill mb-2" style="background-color: #dc2626; color: #fff;">Salsa</span>
+  <h3 class="h6 mb-1">Salsa Avanzado</h3>
+  <p class="small text-muted mb-1">60 min · 20 cupos</p>
+  <p class="fw-bold mb-2">$20.000</p>
+</div>
+  <a href="#" class="btn text-white mt-auto" style="background-color: #dc2626;" onclick="agregarClaseAlCarrito('Salsa Avanzado', 20000, 20)">Inscribirme</a>
+</div>
+</div>
+</div>
+
+<div class="col">
+<div class="card h-100 shadow-sm border-0">
+  <img src="Foto HipHop.jpg" class="card-img-top" alt="Hip-Hop" style="height: 160px; object-fit: cover;">
+<div class="card-body d-flex flex-column">
+<div>
+  <span class="badge rounded-pill mb-2" style="background-color: #7e22ce; color: #fff;">Hip-Hop</span>
+  <h3 class="h6 mb-1">Hip-Hop Intermedio</h3>
+  <p class="small text-muted mb-1">60 min · 20 cupos</p>
+  <p class="fw-bold mb-2">$22.000</p>
+</div>
+<a href="#" class="btn text-white mt-auto" style="background-color: #7e22ce;" onclick="agregarClaseAlCarrito('Hip-Hop Intermedio', 22000, 20)">Inscribirme</a>
+</div>
+</div>
+</div>
+
+<div class="col">
+<div class="card h-100 shadow-sm border-0">
+  <img src="Foto Danza Contemporánea.jpg" class="card-img-top" alt="Contemporánea" style="height: 160px; object-fit: cover;">
+<div class="card-body d-flex flex-column"><div>
+  <span class="badge rounded-pill mb-2" style="background-color: #b45309; color: #fff;">Contemporánea</span>
+  <h3 class="h6 mb-1">Danza Contemporánea</h3>
+  <p class="small text-muted mb-1">75 min · 15 cupos</p>
+  <p class="fw-bold mb-2">$28.000</p>
+</div>
+  <a href="#" class="btn text-white mt-auto" style="background-color: #b45309;" onclick="agregarClaseAlCarrito('Danza Contemporánea', 28000, 15)">Inscribirme</a>
+</div>
+</div>
+</div>
+
+<div class="col">
+<div class="card h-100 shadow-sm border-0">
+  <img src="Foto Zumba.png" class="card-img-top" alt="Zumba" style="height: 160px; object-fit: cover;">
+<div class="card-body d-flex flex-column">
+<div>
+  <span class="badge rounded-pill mb-2" style="background-color: #16a34a; color: #fff;">Zumba</span>
+  <h3 class="h6 mb-1">Zumba Fitness</h3>
+  <p class="small text-muted mb-1">50 min · 25 cupos</p>
+  <p class="fw-bold mb-2">$18.000</p>
+</div>
+  <a href="#" class="btn text-white mt-auto" style="background-color: #16a34a;" onclick="agregarClaseAlCarrito('Zumba Fitness', 18000, 25)">Inscribirme</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+  <!--Tipos de Membresía (Contenedor) (Bootstrap)-->
+   <div class="container my-5 pt-4" id="membresias">
+<h1 class="text-center mb-2 fw-bold">Tipos de membresía</h1>
+<h5 class="text-center text-muted mb-4 fs-6">Elige el plan que más se ajuste a tu ritmo de práctica.</h5> 
+    
+<div class="row row-cols-1 row-cols-md-4 g-4">
+<div class="col">
+<div class="card h-100 shadow-sm border-0">
+<div class="card-body d-flex flex-column">
+  <h5 class="card-title fw-bold">Básica</h5>
+  <p class="small text-muted">2 clases por semana.</p>
+  <p class="fs-5 fw-bold mb-3">$60.000<span class="fs-6 text-muted fw-normal">/mes</span></p>
+  <a href="#" class="btn text-white mt-auto fw-semibold" style="background-color: #0284c7;" onclick="agregarClaseAlCarrito('Membresía Básica', 60000, 50)">Elegir plan</a>
+</div>
+</div>
+</div>
+
+<div class="col">
+<div class="card h-100 shadow-sm border-0">
+<div class="card-body d-flex flex-column">
+  <h5 class="card-title fw-bold">Estándar</h5>
+  <p class="small text-muted">4 clases por semana.</p>
+  <p class="fs-5 fw-bold mb-3">$90.000<span class="fs-6 text-muted fw-normal">/mes</span></p>
+  <a href="#" class="btn text-white mt-auto fw-semibold" style="background-color: #6366f1;" onclick="agregarClaseAlCarrito('Membresía Estándar', 90000, 50)">Elegir plan</a>
+</div>
+</div>
+</div>
+
+  <div class="col">
+  <div class="card h-100 shadow-sm border-0">
+  <div class="card-body d-flex flex-column">
+  <h5 class="card-title fw-bold">Premium</h5>
+  <p class="small text-muted">Acceso ilimitado a todas las clases.</p>
+  <p class="fs-5 fw-bold mb-3">$120.000<span class="fs-6 text-muted fw-normal">/mes</span></p>
+  <a href="#" class="btn text-white mt-auto fw-semibold" style="background-color: #0f172a;" onclick="agregarClaseAlCarrito('Membresía Premium', 120000, 50)">Elegir plan</a>
+  </div>
+  </div>
+  </div>
+
+  <div class="col">
+  <div class="card h-100 shadow-sm border-0">
+  <div class="card-body d-flex flex-column">
+  <h5 class="card-title fw-bold">Clase suelta</h5>
+  <p class="small text-muted">Pago por clase individual.</p>
+  <p class="fs-5 fw-bold mb-3">$25.000<span class="fs-6 text-muted fw-normal">/clase</span></p>
+  <a href="#" class="btn btn-outline-secondary mt-auto fw-semibold" onclick="agregarClaseAlCarrito('Clase Suelta', 25000, 20)">Elegir plan</a>
+</div>
+</div>
+</div>
+</div> 
+</div>
+
+  <!--Contacto (Contenedor) (Bootstrap)-->
+<div class="container my-5 pt-4" id="contacto">
+<div class="bg-dark text-white p-4 p-md-5 rounded-4 shadow">
+<div class="row row-cols-1 row-cols-md-4 g-4 text-center align-items-center">
+<div class="col">
+  <h2 class="fw-bold mb-1">Contáctanos</h2>
+  <p class="small text-white-50 mb-0">Estamos disponibles 24/7 para tus dudas.</p>
+</div>
+<div class="col">
+  <h5 class="fw-bold mb-1">📍 Ubicación</h5>
+  <p class="small text-white-50 mb-0">Av. Principal #123<br>Santiago, Chile</p>
+</div>
+<div class="col">
+  <h5 class="fw-bold mb-1">📞 Teléfono</h5>
+  <p class="small text-white-50 mb-0">+56 9 1234 5678<br>+56 2 2345 6789</p>
+</div>
+<div class="col">
+  <h5 class="fw-bold mb-1">✉️ Contacto</h5>
+  <p class="small text-white-50 mb-0">contacto@academia.cl</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Fin de la sección Inicio (banner + clases + membresías + contacto) -->
+</div>
+
+<div class="container my-5 pt-4 seccion-pagina" id="productos-seccion">
+  <h1 class="text-center fw-bold mb-2">Tienda de Productos</h1>
+  <h5 class="text-center text-muted mb-4 fs-6">Encuentra ropa, accesorios y calzado para tus entrenamientos.</h5>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="grillaProductos"></div>
+</div>
+
+<div class="container my-5 pt-4 seccion-pagina" id="nosotros-seccion">
+  <div class="bg-light p-4 p-md-5 rounded-4 shadow-sm border">
+    <h2 class="fw-bold mb-3 text-center" style="color: #512da8;">Sobre HYPE ACADEMIC</h2>
+    <p class="fs-6 text-secondary text-center mb-4">
+      Somos una academia comprometida con la formación artística e integral de bailarines. Nuestro objetivo es brindar un espacio inclusivo, técnico y dinámico donde la comunidad pueda desarrollar su disciplina al ritmo de la música.
+    </p>
+    <div class="row text-center g-3">
+      <div class="col-md-4">
+        <div class="p-3 bg-white rounded shadow-sm border">
+          <h5 class="fw-bold">Misión</h5>
+          <p class="small text-muted">Promover el bienestar físico y emocional a través de clases de baile de alto nivel accesible a todo público.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 bg-white rounded shadow-sm border">
+          <h5 class="fw-bold">Visión</h5>
+          <p class="small text-muted">Ser la academia digital de danza líder en el país, integrando tecnología y aprendizaje de vanguardia.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 bg-white rounded shadow-sm border">
+          <h5 class="fw-bold">¿Por qué elegirnos?</h5>
+          <p class="small text-muted">Cupos reducidos por clase, instructores especializados por estilo y una plataforma pensada para que tú controles tu proceso: inscripciones, pagos y seguimiento, todo en un solo lugar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5 pt-4 seccion-pagina" id="blogs-seccion">
+  <h1 class="text-center fw-bold mb-2">Noticias y Casos Curiosos</h1>
+  <h5 class="text-center text-muted mb-4 fs-6">Descubre artículos interesantes y datos sobre la cultura de la danza.</h5>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+      <div class="card h-100 border-0 shadow-sm">
+        <img src="Beneficios del baile.jpg" class="card-img-top" alt="Noticia 1" style="height: 220px; object-fit: cover;">
+        <div class="card-body d-flex flex-column">
+          <h4 class="card-title fw-bold">Beneficios del baile en la salud mental</h4>
+          <p class="card-text text-muted">Bailar libera endorfinas, reduce el estrés y mejora la memoria muscular en todas las edades.</p>
+          <button class="btn text-white mt-auto align-self-start" style="background-color: #512da8;" onclick="abrirBlog(1)">Ver Caso</button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-0 shadow-sm">
+        <img src="Evolucion del Hip-Hop.jpg" class="card-img-top" alt="Noticia 2" style="height: 220px; object-fit: cover;">
+        <div class="card-body d-flex flex-column">
+          <h4 class="card-title fw-bold">La evolución del Hip-Hop urbano</h4>
+          <p class="card-text text-muted">Un recorrido histórico sobre cómo la cultura callejera se transformó en una disciplina internacional.</p>
+          <button class="btn text-white mt-auto align-self-start" style="background-color: #512da8;" onclick="abrirBlog(2)">Ver Caso</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5 pt-4 seccion-pagina" id="contacto-form-seccion">
+  <div class="card shadow-sm border-0 p-4 p-md-5">
+    <h2 class="fw-bold text-center mb-2">Formulario de Contacto</h2>
+    <p class="text-center text-muted mb-4">Déjanos tus mensajes o dudas y te responderemos a la brevedad.</p>
+    <form id="formContacto" novalidate>
+      <div class="mb-3">
+        <label for="contactoNombre" class="form-label fw-semibold">Nombre Completo</label>
+        <input type="text" class="form-control" id="contactoNombre" maxlength="100" required>
+        <div class="invalid-feedback">El nombre es requerido (máximo 100 caracteres).</div>
+      </div>
+      <div class="mb-3">
+        <label for="contactoCorreo" class="form-label fw-semibold">Correo Electrónico</label>
+        <input type="email" class="form-control" id="contactoCorreo" maxlength="100" placeholder="ejemplo@gmail.com" required>
+        <div class="invalid-feedback">Ingresa un correo válido (@gmail, @hotmail, @yahoo, @duocuc).</div>
+      </div>
+      <div class="mb-3">
+        <label for="contactoComentario" class="form-label fw-semibold">Comentario</label>
+        <textarea class="form-control" id="contactoComentario" rows="4" maxlength="500" required></textarea>
+        <div class="invalid-feedback">El comentario es requerido (máximo 500 caracteres).</div>
+      </div>
+      <button type="submit" class="btn text-white fw-bold px-4" style="background-color: #512da8;">Enviar Mensaje</button>
+    </form>
+    <div id="contactoAlert" class="mt-3"></div>
+  </div>
+</div>
+
+<div class="container my-5 pt-4 seccion-pagina" id="admin-seccion">
+  <div class="card shadow-sm border-0 p-4">
+    <h2 class="fw-bold mb-4">Panel de Administración</h2>
+    <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active fw-semibold" id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#tab-usuarios" type="button" role="tab">Gestión de Usuarios</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link fw-semibold" id="productos-tab" data-bs-toggle="tab" data-bs-target="#tab-productos" type="button" role="tab">Gestión de Productos</button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="adminTabContent">
+      <div class="tab-pane fade show active" id="tab-usuarios" role="tabpanel">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold mb-0">Usuarios Registrados</h4>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>RUN</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Tipo Usuario</th>
+                <th>Región</th>
+                <th>Comuna</th>
+              </tr>
+            </thead>
+            <tbody id="tablaUsuariosBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="tab-productos" role="tabpanel">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold mb-0">Listado de Productos</h4>
+          <button class="btn btn-sm btn-success fw-bold" data-bs-toggle="modal" data-bs-target="#nuevoProductoModal">+ Nuevo Producto</button>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Stock Crítico</th>
+              </tr>
+            </thead>
+            <tbody id="tablaProductosBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-header fw-bold border-0 p-0">Iniciar Sesión</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formLogin" novalidate>
+          <div class="mb-3">
+            <label for="loginCorreo" class="form-label fw-semibold">Correo Electrónico</label>
+            <input type="email" class="form-control" id="loginCorreo" maxlength="100" placeholder="usuario@gmail.com" required>
+            <div class="invalid-feedback">Correo requerido (@gmail, @hotmail, @yahoo, @duocuc).</div>
+          </div>
+          <div class="mb-3">
+            <label for="loginPass" class="form-label fw-semibold">Contraseña</label>
+            <input type="password" class="form-control" id="loginPass" minlength="4" maxlength="10" required>
+            <div class="invalid-feedback">La contraseña debe tener entre 4 y 10 caracteres.</div>
+          </div>
+          <button type="submit" class="btn text-white w-100 fw-bold" style="background-color: #512da8;">Ingresar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registroModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Registro de Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formRegistro" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="regRun" class="form-label fw-semibold">RUN (9 dígitos sin puntos ni guión)</label>
+              <input type="text" class="form-control" id="regRun" placeholder="19011022K" minlength="9" maxlength="9" required>
+              <div class="invalid-feedback">RUN debe tener exactamente 9 dígitos.</div>
+            </div>
+            <div class="col-md-6">
+              <label for="regNombre" class="form-label fw-semibold">Nombre</label>
+              <input type="text" class="form-control" id="regNombre" maxlength="50" required>
+              <div class="invalid-feedback">Nombre requerido (máx 50 caracteres y máx 3 espacios).</div>
+            </div>
+            <div class="col-md-6">
+              <label for="regApellidos" class="form-label fw-semibold">Apellidos</label>
+              <input type="text" class="form-control" id="regApellidos" maxlength="100" required>
+              <div class="invalid-feedback">Apellidos requeridos (máx 100 caracteres y máx 2 espacios).</div>
+            </div>
+            <div class="col-md-6">
+              <label for="regCorreo" class="form-label fw-semibold">Correo Electrónico</label>
+              <input type="email" class="form-control" id="regCorreo" maxlength="100" placeholder="nombre@gmail.com" required>
+              <div class="invalid-feedback">Correo válido requerido (@gmail, @hotmail, @yahoo, @duocuc).</div>
+            </div>
+            <div class="col-md-6">
+              <label for="regPass" class="form-label fw-semibold">Contraseña</label>
+              <input type="password" class="form-control" id="regPass" minlength="4" maxlength="10" required>
+              <div class="invalid-feedback">Contraseña requerida (4 a 10 caracteres).</div>
+            </div>
+            <div class="col-md-6">
+              <label for="regPassConfirm" class="form-label fw-semibold">Confirmar Contraseña</label>
+              <input type="password" class="form-control" id="regPassConfirm" required>
+              <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+            </div>
+            <div class="col-md-6">
+              <label for="regFecha" class="form-label fw-semibold">Fecha de Nacimiento (Opcional)</label>
+              <input type="date" class="form-control" id="regFecha">
+            </div>
+            <div class="col-md-6">
+              <label for="regTipo" class="form-label fw-semibold">Tipo de Usuario</label>
+              <select class="form-select" id="regTipo" required>
+                <option value="Cliente">Cliente</option>
+                <option value="Vendedor">Vendedor</option>
+                <option value="Administrador">Administrador</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="regRegion" class="form-label fw-semibold">Región</label>
+              <select class="form-select" id="regRegion" required>
+                <option value="">Seleccione una región</option>
+              </select>
+              <div class="invalid-feedback">Selecciona una región.</div>
+            </div>
+            <div class="col-md-6">
+              <label for="regComuna" class="form-label fw-semibold">Comuna</label>
+              <select class="form-select" id="regComuna" required disabled>
+                <option value="">Seleccione una comuna</option>
+              </select>
+              <div class="invalid-feedback">Selecciona una comuna.</div>
+            </div>
+            <div class="col-12">
+              <label for="regDireccion" class="form-label fw-semibold">Dirección</label>
+              <input type="text" class="form-control" id="regDireccion" maxlength="300" required>
+              <div class="invalid-feedback">Dirección requerida (máx 300 caracteres).</div>
+            </div>
+          </div>
+          <button type="submit" class="btn text-white w-100 fw-bold mt-4" style="background-color: #512da8;">Registrar Usuario</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="carritoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Mi Carrito de Compras</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="contenidoCarrito"></div>
+        <hr>
+        <div class="row align-items-center g-3">
+          <div class="col-md-6">
+            <div class="input-group">
+              <input type="text" class="form-control" id="cuponInput" placeholder="Ingrese cupón de descuento">
+              <button class="btn btn-outline-secondary" type="button" onclick="aplicarDescuento()">APLICAR</button>
+            </div>
+            <div id="cuponFeedback" class="small mt-1"></div>
+          </div>
+          <div class="col-md-6 text-end">
+            <h4 class="fw-bold mb-0">TOTAL: <span id="cartTotal">$0</span></h4>
+            <div id="descuentoDetalle" class="small text-success fw-bold"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguir Comprando</button>
+        <button type="button" class="btn btn-success fw-bold px-4" id="btnPagar" onclick="abrirPagoTarjeta()">PAGAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="pagoTarjetaModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Ingreso de Datos de Tarjeta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formTarjeta" novalidate>
+          <div class="mb-3">
+            <label for="tarjetaNombre" class="form-label fw-semibold">Titular de la Tarjeta</label>
+            <input type="text" class="form-control" id="tarjetaNombre" required>
+            <div class="invalid-feedback">Nombre del titular requerido.</div>
+          </div>
+          <div class="mb-3">
+            <label for="tarjetaNumero" class="form-label fw-semibold">Número de Tarjeta</label>
+            <input type="text" class="form-control" id="tarjetaNumero" placeholder="1234 5678 9012 3456" maxlength="16" required>
+            <div class="invalid-feedback">Ingrese un número de tarjeta válido (16 dígitos).</div>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label for="tarjetaExp" class="form-label fw-semibold">Expiración (MM/AA)</label>
+              <input type="text" class="form-control" id="tarjetaExp" placeholder="12/28" maxlength="5" required>
+              <div class="invalid-feedback">Expiración requerida.</div>
+            </div>
+            <div class="col-6">
+              <label for="tarjetaCvv" class="form-label fw-semibold">CVV</label>
+              <input type="password" class="form-control" id="tarjetaCvv" maxlength="4" required>
+              <div class="invalid-feedback">CVV requerido.</div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success w-100 fw-bold">Confirmar Pago</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="detalleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="detalleTitulo">Detalle de Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="detalleContenido"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="nuevoProductoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Agregar Nuevo Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formNuevoProducto" novalidate>
+          <div class="mb-3">
+            <label for="prodCodigo" class="form-label fw-semibold">Código</label>
+            <input type="text" class="form-control" id="prodCodigo" minlength="3" required>
+            <div class="invalid-feedback">Código requerido (mínimo 3 caracteres).</div>
+          </div>
+          <div class="mb-3">
+            <label for="prodNombre" class="form-label fw-semibold">Nombre</label>
+            <input type="text" class="form-control" id="prodNombre" maxlength="100" required>
+            <div class="invalid-feedback">Nombre requerido (máx 100 caracteres).</div>
+          </div>
+          <div class="mb-3">
+            <label for="prodCategoria" class="form-label fw-semibold">Categoría</label>
+            <select class="form-select" id="prodCategoria" required>
+              <option value="">Seleccione una categoría</option>
+              <option value="Vestuario">Vestuario</option>
+              <option value="Calzado">Calzado</option>
+              <option value="Accesorios">Accesorios</option>
+            </select>
+            <div class="invalid-feedback">Selecciona una categoría.</div>
+          </div>
+          <div class="mb-3">
+            <label for="prodPrecio" class="form-label fw-semibold">Precio ($)</label>
+            <input type="number" class="form-control" id="prodPrecio" min="0" step="1" required>
+            <div class="invalid-feedback">Precio requerido (mayor o igual a 0).</div>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label for="prodStock" class="form-label fw-semibold">Stock</label>
+              <input type="number" class="form-control" id="prodStock" min="0" step="1" required>
+              <div class="invalid-feedback">Stock requerido.</div>
+            </div>
+            <div class="col-6">
+              <label for="prodCritico" class="form-label fw-semibold">Stock Crítico</label>
+              <input type="number" class="form-control" id="prodCritico" min="0" step="1">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="prodDesc" class="form-label fw-semibold">Descripción (Opcional)</label>
+            <textarea class="form-control" id="prodDesc" rows="2" maxlength="500"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 fw-bold">Guardar Producto</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!--este script es para cerrar el menú sin bloquear la navegación-->
+<script>
+const offcanvasEl = document.getElementById('offcanvasNavbar');
+document.querySelectorAll('.offcanvas-body a').forEach(link => {
+  link.addEventListener('click', () => {
+    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+    if (offcanvas) {
+      offcanvas.hide();
+    }
+  });
+});
+</script>
+
+<script>
+function mostrarSeccion(idTarget) {
+const secciones = document.querySelectorAll('.seccion-pagina');
+secciones.forEach(sec => sec.style.display = 'none');
+const target = document.getElementById(idTarget);
+  if (target) {
+    target.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// Lleva a la pantalla de Inicio y hace scroll suave hasta el bloque pedido
+// (Clases, Membresías o Contacto), ya que ahora esos bloques viven dentro de Inicio.
+function irASeccionInicio(idAnchor) {
+  mostrarSeccion('inicio-seccion');
+  setTimeout(() => {
+    const el = document.getElementById(idAnchor);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 60);
+}
+
+function verificarCuponSeptiembre() {
+const mesActual = new Date().getMonth();
+const banner = document.getElementById("bannerCuponSeptiembre");
+  if (mesActual === 8) {
+    banner.style.display = "block";
+  } else {
+    banner.style.display = "none";
+  }
+}
+
+const regionesYComunas = [
+  {
+    region: "Región Metropolitana de Santiago",
+    comunas: [
+      "Alhué", "Buin", "Calera de Tango", "Cerrillos", "Cerro Navia", "Colina",
+      "Conchalí", "Curacaví", "El Bosque", "El Monte", "Estación Central",
+      "Huechuraba", "Independencia", "Isla de Maipo", "La Cisterna", "La Florida",
+      "La Granja", "La Pintana", "La Reina", "Lampa", "Las Condes", "Lo Barnechea",
+      "Lo Espejo", "Lo Prado", "Macul", "Maipú", "María Pinto", "Melipilla",
+      "Ñuñoa", "Padre Hurtado", "Paine", "Pedro Aguirre Cerda", "Peñaflor",
+      "Peñalolén", "Pirque", "Providencia", "Pudahuel", "Puente Alto", "Quilicura",
+      "Quinta Normal", "Recoleta", "Renca", "San Bernardo", "San Joaquín",
+      "San José de Maipo", "San Miguel", "San Pedro", "San Ramón", "Santiago",
+      "Talagante", "Tiltil", "Vitacura"
+    ]
+  }
+];
+
+let productos = [
+  { id: 101, codigo: "PROD-01", nombre: "Zapatillas de Ballet Profesional", categoria: "Calzado", precio: 35000, stock: 12, stockCritico: 3, imagen: "Zapatillas de danza.webp", desc: "Zapatillas flexibles de lona de alta durabilidad para prácticas y presentaciones.", tallas: ["35", "36", "37", "38", "39", "40"] },
+  { id: 102, codigo: "PROD-02", nombre: "Malla de Danza Elástica", categoria: "Vestuario", precio: 22000, stock: 5, stockCritico: 5, imagen: "Malla de Danza Elástica.jpeg", desc: "Malla ergonómica transpirable ideal para entrenamiento intensivo." },
+  { id: 103, codigo: "PROD-03", nombre: "Pants Urban Hip-Hop", categoria: "Vestuario", precio: 28000, stock: 20, stockCritico: 4, imagen: "Pants Urban Hip-Hop.avif", desc: "Pantalón holgado de algodón reforzado diseñado para la danza urbana.", tallas: ["S", "M", "L", "XL"] },
+  { id: 104, codigo: "PROD-04", nombre: "Zapatos de Salsa Cuero", categoria: "Calzado", precio: 45000, stock: 2, stockCritico: 3, imagen: "Zapatos de Salsa Cuero.webp", desc: "Calzado de cuero legítimo con suela antideslizante para giros rápidos.", tallas: ["36", "37", "38", "39", "40", "41", "42"] },
+  { id: 105, codigo: "PROD-05", nombre: "Toalla Microfibra Hype", categoria: "Accesorios", precio: 12000, stock: 30, stockCritico: 10, imagen: "Toalla Microfibra Hype.webp", desc: "Toalla ligera de secado ultrarrápido con diseño de la academia." },
+  { id: 106, codigo: "PROD-06", nombre: "Botella Térmica 750ml", categoria: "Accesorios", precio: 15000, stock: 15, stockCritico: 5, imagen: "Botella Térmica 750ml.webp", desc: "Mantiene tus bebidas frías durante toda tu jornada de entrenamiento." }
+];
+
+let usuarios = [
+  { run: "19011022K", nombre: "Juan", apellidos: "Pérez", correo: "juan@duocuc.cl", tipo: "Administrador", region: "Región Metropolitana de Santiago", comuna: "Santiago" },
+  { run: "182345678", nombre: "Maria", apellidos: "Gómez", correo: "maria@hotmail.com", tipo: "Vendedor", region: "Región Metropolitana de Santiago", comuna: "Providencia" },
+  { run: "201234567", nombre: "Carlos", apellidos: "López", correo: "carlos@gmail.com", tipo: "Cliente", region: "Región Metropolitana de Santiago", comuna: "Maipú" }
+];
+
+let carrito = JSON.parse(localStorage.getItem("hype_cart")) || [];
+let descuentoAplicado = 0;
+
+//carga la pagina inicial
+document.addEventListener("DOMContentLoaded", () => {
+  poblarRegiones();
+  renderProductos();
+  renderTablaProductos();
+  renderTablaUsuarios();
+  actualizarCarrito();
+  verificarCuponSeptiembre();
+  mostrarSeccion('inicio-seccion');
+});
+
+function poblarRegiones() {
+const regSelect = document.getElementById("regRegion");
+const comSelect = document.getElementById("regComuna");
+  regionesYComunas.forEach(item => {
+    const opt = document.createElement("option");
+    opt.value = item.region;
+    opt.textContent = item.region;
+    regSelect.appendChild(opt);
+  });
+
+  regSelect.addEventListener("change", (e) => {
+    const regionName = e.target.value;
+    comSelect.innerHTML = '<option value="">Seleccione una comuna</option>';
+    const regObj = regionesYComunas.find(r => r.region === regionName);
+    if (regObj) {
+      comSelect.disabled = false;
+      regObj.comunas.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c;
+        opt.textContent = c;
+        comSelect.appendChild(opt);
+      });
+    } else {
+      comSelect.disabled = true;
+    }
+  });
+}
+ ///muestra los productos en la página
+function renderProductos() {
+const container = document.getElementById("grillaProductos");
+container.innerHTML = "";
+productos.forEach(p => {
+  let selectTallaHtml = "";
+    if (p.tallas && p.tallas.length > 0) {
+      selectTallaHtml = `
+        <div class="mb-2">
+          <label class="form-label small fw-semibold mb-1">Talla:</label>
+          <select class="form-select form-select-sm" id="talla-select-${p.id}">
+            ${p.tallas.map(t => `<option value="${t}">${t}</option>`).join('')}
+          </select>
+        </div>
+      `;
+    }
+    container.innerHTML += `
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="${p.imagen}" class="card-img-top" alt="${p.nombre}" style="height: 180px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <span class="badge bg-secondary mb-2 align-self-start">${p.categoria}</span>
+            <h5 class="h6 fw-bold mb-1">${p.nombre}</h5>
+            <p class="fw-bold fs-5 mb-2">$${p.precio.toLocaleString('es-CL')}</p>
+            ${selectTallaHtml}
+            <div class="mt-auto d-grid gap-2">
+              <button class="btn btn-outline-dark btn-sm fw-semibold" onclick="verDetalleProducto(${p.id})">Ver Detalle</button>
+              <button class="btn text-white btn-sm fw-semibold" style="background-color: #512da8;" onclick="agregarAlCarrito(${p.id})">Añadir al Carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+// Muestra el detalle completo de un producto
+function verDetalleProducto(id) {
+  const p = productos.find(item => item.id === id);
+  if (!p) return;
+  let selectTallaHtml = "";
+  if (p.tallas && p.tallas.length > 0) {
+    selectTallaHtml = `
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Seleccionar Talla:</label>
+        <select class="form-select" id="talla-detail-select-${p.id}">
+          ${p.tallas.map(t => `<option value="${t}">${t}</option>`).join('')}
+        </select>
+      </div>
+    `;
+  }
+  document.getElementById("detalleTitulo").textContent = p.nombre;
+  document.getElementById("detalleContenido").innerHTML = `
+    <div class="row g-4 align-items-center">
+      <div class="col-md-6">
+        <img src="${p.imagen}" class="img-fluid rounded shadow" alt="${p.nombre}" style="max-height: 280px; width: 100%; object-fit: cover;">
+      </div>
+      <div class="col-md-6">
+        <span class="badge bg-primary mb-2">${p.categoria}</span>
+        <h3 class="fw-bold mb-2">$${p.precio.toLocaleString('es-CL')}</h3>
+        <p class="text-muted">${p.desc}</p>
+        ${selectTallaHtml}
+        <p class="small text-secondary mb-3">Stock disponible: <strong>${p.stock} unidades</strong></p>
+        <button class="btn text-white fw-bold w-100" style="background-color: #512da8;" onclick="agregarAlCarrito(${p.id})">Añadir al Carrito</button>
+      </div>
+    </div>
+  `;
+  const modal = new bootstrap.Modal(document.getElementById("detalleModal"));
+  modal.show();
+}
+
+function agregarAlCarrito(id) {
+  const p = productos.find(item => item.id === id);
+  if (!p) return;
+  
+  let tallaElegida = "";
+  const selectTalla = document.getElementById(`talla-select-${id}`) || document.getElementById(`talla-detail-select-${id}`);
+  if (selectTalla) {
+    tallaElegida = selectTalla.value;
+  } else if (p.tallas && p.tallas.length > 0) {
+    tallaElegida = p.tallas[0];
+  }
+  
+  const nombreFinal = tallaElegida ? `${p.nombre} (Talla ${tallaElegida})` : p.nombre;
+  
+  const totalActualEnCarrito = carrito
+    .filter(i => i.idProducto === p.id)
+    .reduce((sum, i) => sum + i.cantidad, 0);
+
+  if (totalActualEnCarrito + 1 > p.stock) {
+    alert("No es posible agregar más productos. Ha alcanzado el límite de stock disponible.");
+    return;
+  }
+
+  const itemInCart = carrito.find(i => i.nombre === nombreFinal);
+  if (itemInCart) {
+    itemInCart.cantidad++;
+  } else {
+    carrito.push({ id: Date.now(), idProducto: p.id, nombre: nombreFinal, precio: p.precio, cantidad: 1 });
+  }
+  guardarCarrito();
+  alert("Producto agregado al carrito.");
+}
+
+/// Agrega clases o membresias al carrito con validacion de cupos
+function agregarClaseAlCarrito(nombre, precio, cupoMax) {
+  const itemInCart = carrito.find(i => i.nombre === nombre);
+  const cantidadActual = itemInCart ? itemInCart.cantidad : 0;
+
+  if (cupoMax && cantidadActual + 1 > cupoMax) {
+    alert("No es posible inscribirse. Se ha alcanzado el límite de cupos para esta clase.");
+    return;
+  }
+
+  if (itemInCart) {
+    itemInCart.cantidad++;
+  } else {
+    carrito.push({ id: Date.now(), nombre: nombre, precio: precio, cantidad: 1, cupoMax: cupoMax });
+  }
+  guardarCarrito();
+  const modal = new bootstrap.Modal(document.getElementById("carritoModal"));
+  modal.show();
+}
+
+function guardarCarrito() {
+  localStorage.setItem("hype_cart", JSON.stringify(carrito));
+  actualizarCarrito();
+}
+
+function actualizarCarrito() {
+  const countEl = document.getElementById("cartCount");
+  const contenido = document.getElementById("contenidoCarrito");
+  const totalEl = document.getElementById("cartTotal");
+
+  const totalItems = carrito.reduce((acc, curr) => acc + curr.cantidad, 0);
+  countEl.textContent = totalItems;
+
+  if (carrito.length === 0) {
+    contenido.innerHTML = '<p class="text-center text-muted my-4">El carrito está vacío.</p>';
+    totalEl.textContent = '$0';
+    document.getElementById("btnPagar").disabled = true;
+    return;
+  }
+
+  document.getElementById("btnPagar").disabled = false;
+  let subtotal = 0;
+  let html = '<div class="list-group list-group-flush">';
+
+  carrito.forEach((item, index) => {
+    const itemTotal = item.precio * item.cantidad;
+    subtotal += itemTotal;
+    html += `
+      <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+        <div>
+          <h6 class="mb-0 fw-bold">${item.nombre}</h6>
+          <small class="text-muted">$${item.precio.toLocaleString('es-CL')} c/u</small>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-sm btn-outline-secondary" onclick="cambiarCantidad(${index}, -1)">-</button>
+          <span class="fw-bold px-2">${item.cantidad}</span>
+          <button class="btn btn-sm btn-outline-secondary" onclick="cambiarCantidad(${index}, 1)">+</button>
+          <span class="fw-bold ms-3" style="min-width: 80px; text-align: right;">$${itemTotal.toLocaleString('es-CL')}</span>
+          <button class="btn btn-sm btn-outline-danger ms-2" onclick="eliminarDelCarrito(${index})">✕</button>
+        </div>
+      </div>
+    `;
+  });
+  html += '</div>';
+  contenido.innerHTML = html;
+
+  let totalFinal = subtotal - descuentoAplicado;
+  if (totalFinal < 0) totalFinal = 0;
+  totalEl.textContent = `$${totalFinal.toLocaleString('es-CL')}`;
+}
+
+function cambiarCantidad(index, delta) {
+  const item = carrito[index];
+  if (delta > 0) {
+    if (item.idProducto) {
+      const p = productos.find(prod => prod.id === item.idProducto);
+      const totalActual = carrito
+        .filter(i => i.idProducto === item.idProducto)
+        .reduce((sum, i) => sum + i.cantidad, 0);
+      if (p && totalActual + 1 > p.stock) {
+        alert("No es posible agregar más. Límite de stock disponible alcanzado.");
+        return;
+      }
+    } else if (item.cupoMax && item.cantidad + 1 > item.cupoMax) {
+      alert("No es posible agregar más. Límite de cupos alcanzado.");
+      return;
+    }
+  }
+
+  item.cantidad += delta;
+  if (item.cantidad <= 0) {
+    carrito.splice(index, 1);
+  }
+  guardarCarrito();
+}
+
+function eliminarDelCarrito(index) {
+  carrito.splice(index, 1);
+  guardarCarrito();
+}
+///validar el cupon
+function aplicarDescuento() {
+  const input = document.getElementById("cuponInput").value.trim().toUpperCase();
+  const feedback = document.getElementById("cuponFeedback");
+  const detalle = document.getElementById("descuentoDetalle");
+
+  if (input === "HYPE10" || input === "DESCUENTO10" || input === "SEPTIEMBRE10") {
+    descuentoAplicado = 5000;
+    feedback.className = "small mt-1 text-success fw-bold";
+    feedback.textContent = "¡Cupón de $5.000 aplicado correctamente!";
+    detalle.textContent = "Descuento aplicado: -$5.000";
+  } else {
+    descuentoAplicado = 0;
+    feedback.className = "small mt-1 text-danger fw-bold";
+    feedback.textContent = "Cupón inválido. Intente con SEPTIEMBRE10 u HYPE10";
+    detalle.textContent = "";
+  }
+  actualizarCarrito();
+}
+
+function abrirPagoTarjeta() {
+  const modalCart = bootstrap.Modal.getInstance(document.getElementById("carritoModal"));
+  if (modalCart) modalCart.hide();
+  const modalTarjeta = new bootstrap.Modal(document.getElementById("pagoTarjetaModal"));
+  modalTarjeta.show();
+}
+
+function validarCorreoDomain(correo) {
+  const val = correo.trim().toLowerCase();
+  return val.endsWith("@gmail.com") || 
+         val.endsWith("@hotmail.com") || 
+         val.endsWith("@yahoo.com") || 
+         val.endsWith("@duocuc.cl") || 
+         val.endsWith("@duoc.cl") || 
+         val.endsWith("@profesor.duoc.cl");
+}
+
+document.getElementById("formContacto").addEventListener("submit", function(e) {
+  e.preventDefault();
+  let valido = true;
+  const nombre = document.getElementById("contactoNombre");
+  const correo = document.getElementById("contactoCorreo");
+  const comentario = document.getElementById("contactoComentario");
+
+  if (!nombre.value.trim() || nombre.value.length > 100) {
+    nombre.classList.add("is-invalid"); valido = false;
+  } else { nombre.classList.remove("is-invalid"); nombre.classList.add("is-valid"); }
+
+  if (!correo.value.trim() || correo.value.length > 100 || !validarCorreoDomain(correo.value)) {
+    correo.classList.add("is-invalid"); valido = false;
+  } else { correo.classList.remove("is-invalid"); correo.classList.add("is-valid"); }
+
+  if (!comentario.value.trim() || comentario.value.length > 500) {
+    comentario.classList.add("is-invalid"); valido = false;
+  } else { comentario.classList.remove("is-invalid"); comentario.classList.add("is-valid"); }
+
+  if (valido) {
+    document.getElementById("contactoAlert").innerHTML = '<div class="alert alert-success">¡Mensaje enviado con éxito! Nos contactaremos contigo a la brevedad.</div>';
+    this.reset();
+    document.querySelectorAll("#formContacto .is-valid").forEach(i => i.classList.remove("is-valid"));
+  }
+});
+
+document.getElementById("formLogin").addEventListener("submit", function(e) {
+  e.preventDefault();
+  let valido = true;
+  const correo = document.getElementById("loginCorreo");
+  const pass = document.getElementById("loginPass");
+
+  if (!correo.value.trim() || correo.value.length > 100 || !validarCorreoDomain(correo.value)) {
+    correo.classList.add("is-invalid"); valido = false;
+  } else { correo.classList.remove("is-invalid"); correo.classList.add("is-valid"); }
+
+  if (!pass.value.trim() || pass.value.length < 4 || pass.value.length > 10) {
+    pass.classList.add("is-invalid"); valido = false;
+  } else { pass.classList.remove("is-invalid"); pass.classList.add("is-valid"); }
+
+  if (valido) {
+    alert("¡Inicio de sesión exitoso!");
+    bootstrap.Modal.getInstance(document.getElementById("loginModal")).hide();
+    this.reset();
+  }
+});
+
+document.getElementById("formRegistro").addEventListener("submit", function(e) {
+  e.preventDefault();
+  let valido = true;
+  const run = document.getElementById("regRun");
+  const nombre = document.getElementById("regNombre");
+  const apellidos = document.getElementById("regApellidos");
+  const correo = document.getElementById("regCorreo");
+  const pass = document.getElementById("regPass");
+  const passConf = document.getElementById("regPassConfirm");
+  const region = document.getElementById("regRegion");
+  const comuna = document.getElementById("regComuna");
+  const direccion = document.getElementById("regDireccion");
+  const tipo = document.getElementById("regTipo");
+
+  const runClean = run.value.replace(/[\.\-]/g, '');
+  if (runClean.length !== 9) {
+    run.classList.add("is-invalid"); valido = false;
+  } else { run.classList.remove("is-invalid"); run.classList.add("is-valid"); }
+
+  const espaciosNombre = (nombre.value.match(/ /g) || []).length;
+  if (!nombre.value.trim() || nombre.value.length > 50 || espaciosNombre > 3) {
+    nombre.classList.add("is-invalid"); valido = false;
+  } else { nombre.classList.remove("is-invalid"); nombre.classList.add("is-valid"); }
+
+  const espaciosApellidos = (apellidos.value.match(/ /g) || []).length;
+  if (!apellidos.value.trim() || apellidos.value.length > 100 || espaciosApellidos > 2) {
+    apellidos.classList.add("is-invalid"); valido = false;
+  } else { apellidos.classList.remove("is-invalid"); apellidos.classList.add("is-valid"); }
+
+  if (!correo.value.trim() || correo.value.length > 30 || !validarCorreoDomain(correo.value)) {
+    correo.classList.add("is-invalid"); valido = false;
+  } else { correo.classList.remove("is-invalid"); correo.classList.add("is-valid"); }
+
+  if (!pass.value.trim() || pass.value.length < 4 || pass.value.length > 10) {
+    pass.classList.add("is-invalid"); valido = false;
+  } else { pass.classList.remove("is-invalid"); pass.classList.add("is-valid"); }
+
+  if (passConf.value !== pass.value || !passConf.value) {
+    passConf.classList.add("is-invalid"); valido = false;
+  } else { passConf.classList.remove("is-invalid"); passConf.classList.add("is-valid"); }
+
+  if (!region.value) { region.classList.add("is-invalid"); valido = false; } else { region.classList.remove("is-invalid"); region.classList.add("is-valid"); }
+  if (!comuna.value) { comuna.classList.add("is-invalid"); valido = false; } else { comuna.classList.remove("is-invalid"); comuna.classList.add("is-valid"); }
+
+  if (!direccion.value.trim() || direccion.value.length > 300) {
+    direccion.classList.add("is-invalid"); valido = false;
+  } else { direccion.classList.remove("is-invalid"); direccion.classList.add("is-valid"); }
+
+  if (valido) {
+    usuarios.push({
+      run: runClean,
+      nombre: nombre.value.trim(),
+      apellidos: apellidos.value.trim(),
+      correo: correo.value.trim(),
+      tipo: tipo.value,
+      region: region.value,
+      comuna: comuna.value
+    });
+    renderTablaUsuarios();
+    alert("Usuario registrado exitosamente.");
+    bootstrap.Modal.getInstance(document.getElementById("registroModal")).hide();
+    this.reset();
+  }
+});
+//validacion formulario tarjeta
+document.getElementById("formTarjeta").addEventListener("submit", function(e) {
+  e.preventDefault();
+  let valido = true;
+  const num = document.getElementById("tarjetaNumero");
+  const nom = document.getElementById("tarjetaNombre");
+  const exp = document.getElementById("tarjetaExp");
+  const cvv = document.getElementById("tarjetaCvv");
+
+  if (!nom.value.trim()) { nom.classList.add("is-invalid"); valido = false; } else nom.classList.remove("is-invalid");
+  if (num.value.replace(/\s/g, '').length < 15) { num.classList.add("is-invalid"); valido = false; } else num.classList.remove("is-invalid");
+  if (!exp.value.trim()) { exp.classList.add("is-invalid"); valido = false; } else exp.classList.remove("is-invalid");
+  if (cvv.value.length < 3) { cvv.classList.add("is-invalid"); valido = false; } else cvv.classList.remove("is-invalid");
+
+  if (valido) {
+    alert("¡Pago procesado con éxito! Gracias por tu compra.");
+    carrito = [];
+    descuentoAplicado = 0;
+    guardarCarrito();
+    bootstrap.Modal.getInstance(document.getElementById("pagoTarjetaModal")).hide();
+    this.reset();
+  }
+});
+///validación y creación de nuevos productos
+document.getElementById("formNuevoProducto").addEventListener("submit", function(e) {
+  e.preventDefault();
+  let valido = true;
+  const codigo = document.getElementById("prodCodigo");
+  const nombre = document.getElementById("prodNombre");
+  const cat = document.getElementById("prodCategoria");
+  const precio = document.getElementById("prodPrecio");
+  const stock = document.getElementById("prodStock");
+  const critico = document.getElementById("prodCritico");
+  const desc = document.getElementById("prodDesc");
+
+  if (codigo.value.trim().length < 3) { codigo.classList.add("is-invalid"); valido = false; } else codigo.classList.remove("is-invalid");
+  if (!nombre.value.trim() || nombre.value.length > 100) { nombre.classList.add("is-invalid"); valido = false; } else nombre.classList.remove("is-invalid");
+  if (!cat.value) { cat.classList.add("is-invalid"); valido = false; } else cat.classList.remove("is-invalid");
+  if (precio.value === "" || parseFloat(precio.value) < 0) { precio.classList.add("is-invalid"); valido = false; } else precio.classList.remove("is-invalid");
+  if (stock.value === "" || parseInt(stock.value) < 0) { stock.classList.add("is-invalid"); valido = false; } else stock.classList.remove("is-invalid");
+
+  if (valido) {
+    productos.push({
+      id: Date.now(),
+      codigo: codigo.value.trim(),
+      nombre: nombre.value.trim(),
+      categoria: cat.value,
+      precio: parseFloat(precio.value),
+      stock: parseInt(stock.value),
+      stockCritico: critico.value !== "" ? parseInt(critico.value) : 0,
+      imagen: "Logo Promocional.png",
+      desc: desc.value.trim() || "Producto oficial de Hype Academic."
+    });
+    renderProductos();
+    renderTablaProductos();
+    alert("Producto guardado correctamente.");
+    bootstrap.Modal.getInstance(document.getElementById("nuevoProductoModal")).hide();
+    this.reset();
+  }
+});
+
+function renderTablaUsuarios() {
+  const tbody = document.getElementById("tablaUsuariosBody");
+  tbody.innerHTML = "";
+  usuarios.forEach(u => {
+    tbody.innerHTML += `
+      <tr>
+        <td class="fw-bold">${u.run}</td>
+        <td>${u.nombre} ${u.apellidos}</td>
+        <td>${u.correo}</td>
+        <td><span class="badge bg-info text-dark">${u.tipo}</span></td>
+        <td>${u.region}</td>
+        <td>${u.comuna}</td>
+      </tr>
+    `;
+  });
+}
+// muestra la tabla de administración de productos
+function renderTablaProductos() {
+  const tbody = document.getElementById("tablaProductosBody");
+  tbody.innerHTML = "";
+  productos.forEach(p => {
+    const alertaStock = (p.stockCritico && p.stock <= p.stockCritico) ? '<span class="badge bg-danger ms-2">Stock Crítico</span>' : '';
+    tbody.innerHTML += `
+      <tr>
+        <td class="fw-bold">${p.codigo}</td>
+        <td>${p.nombre}</td>
+        <td>${p.categoria}</td>
+        <td>$${p.precio.toLocaleString('es-CL')}</td>
+        <td>${p.stock} ${alertaStock}</td>
+        <td>${p.stockCritico || 'N/A'}</td>
+      </tr>
+    `;
+  });
+}
+///carga y abre el contnido de un blog en un modal
+function abrirBlog(num) {
+  const titulo = num === 1 ? "Beneficios del baile en la salud mental" : "La evolución del Hip-Hop urbano";
+  const texto = num === 1 
+    ? "Bailar es una de las actividades físicas más completas para el cerebro. Al aprender coreografías, se estimula la memoria y la neuroplasticidad. Además, la práctica continua disminuye significativamente los niveles de cortisol (estrés) y aumenta la serotonina, favoreciendo la autoestima y la conexión interpersonal."
+    : "Surgido en el Bronx durante los años 70, el Hip-Hop trasciende la música y el baile para convertirse en una forma de expresión social. En Chile, la escena urbana ha crecido exponencialmente, transformando las plazas y academias en semilleros de talento nacional con proyección internacional.";
+  
+  document.getElementById("detalleTitulo").textContent = titulo;
+  document.getElementById("detalleContenido").innerHTML = `<p class="fs-6 leading-relaxed">${texto}</p>`;
+  const modal = new bootstrap.Modal(document.getElementById("detalleModal"));
+  modal.show();
+}
+</script>
+
+</body>
+</html>
